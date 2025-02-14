@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            overflow: hidden;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .heart {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            animation: float 3s ease-in-out forwards, appear 1s ease-in-out forwards;
+            transform: rotate(-45deg);
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 50px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(-45deg);
+            }
+            100% {
+                transform: translateY(0) rotate(-45deg);
+            }
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .message {
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards, textGlow 2s infinite alternate;
+            margin-top: 20px;
+            font-size: 2em;
+            text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.7);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.7);
+            }
+            100% {
+                text-shadow: 4px 4px 10px rgba(255, 255, 0, 1);
+            }
+        }
+
+        .cracker {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: gold;
+            border-radius: 50%;
+            animation: explode 1.5s ease-out infinite;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        .copyright {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.8em;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart"></div>
+        <h1 class="message">Be my Valentine</h1>
+    </div>
+    <div class="copyright">@Copyright by Rohan.Soumyajit</div>
+    <script>
+        function createCracker() {
+            const cracker = document.createElement('div');
+            cracker.classList.add('cracker');
+            document.body.appendChild(cracker);
+            cracker.style.left = Math.random() * window.innerWidth + 'px';
+            cracker.style.top = Math.random() * window.innerHeight + 'px';
+            setTimeout(() => cracker.remove(), 1500);
+        }
+        setInterval(createCracker, 200);
+    </script>
+</body>
+</html>
